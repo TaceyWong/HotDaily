@@ -1,0 +1,156 @@
+basePath: /api/v1
+definitions:
+  models.ListItem:
+    properties:
+      author:
+        type: string
+      cover:
+        type: string
+      desc:
+        type: string
+      hot:
+        type: integer
+      id:
+        type: string
+      mobile_url:
+        type: string
+      title:
+        type: string
+      url:
+        type: string
+    required:
+    - id
+    - mobile_url
+    - title
+    - url
+    type: object
+  routers.HTTPError:
+    properties:
+      code:
+        example: 400
+        type: integer
+      message:
+        example: status bad request
+        type: string
+    type: object
+host: 127.0.0.1:8181
+info:
+  contact:
+    email: xinyong.wang@qq.com
+    name: 问题追踪
+    url: https://github.com/TaceyWong/hot-daily/issues
+  description: 聚合新闻热榜数据的API接口.
+  license:
+    name: MIT
+    url: https://www.tldrlegal.com/license/mit-license
+  title: HotDaily API
+  version: "1.0"
+paths:
+  /bilibili:
+    get:
+      consumes:
+      - application/json
+      description: get admin info
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ListItem'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/routers.HTTPError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/routers.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/routers.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/routers.HTTPError'
+      security:
+      - ApiKeyAuth: []
+      summary: 哔哩哔哩排行榜接口
+      tags:
+      - 热门榜
+  /douban_movie:
+    get:
+      consumes:
+      - application/json
+      description: get admin info
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ListItem'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/routers.HTTPError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/routers.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/routers.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/routers.HTTPError'
+      security:
+      - ApiKeyAuth: []
+      summary: 豆瓣电影新片排行榜接口
+      tags:
+      - 新片排行榜
+  /zhihu:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.ListItem'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/routers.HTTPError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/routers.HTTPError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/routers.HTTPError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/routers.HTTPError'
+      security:
+      - ApiKeyAuth: []
+      summary: 今日头条热榜接口
+      tags:
+      - 热榜
+schemes:
+- http
+- https
+securityDefinitions:
+  ApiKeyAuth:
+    description: 用于限定接口访问权限以及用户追踪
+    in: header
+    name: HOT-DAILY
+    type: apiKey
+swagger: "2.0"

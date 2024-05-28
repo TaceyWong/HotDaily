@@ -1,0 +1,26 @@
+package routers
+
+import (
+	"net/http"
+
+	_ "github.com/TaceyWong/HotDaily/models"
+	"github.com/labstack/echo/v4"
+)
+
+// AcFunHot godoc
+//
+//	@Summary		AcFun排行榜接口
+//	@Description	get admin info
+//	@Tags			排行榜
+//	@Accept			json
+//	@Produce		json
+//	@Success		200	{object}	models.ListItem
+//	@Failure		400	{object}	HTTPError
+//	@Failure		401	{object}	HTTPError
+//	@Failure		404	{object}	HTTPError
+//	@Failure		500	{object}	HTTPError
+//	@Security		ApiKeyAuth
+//	@Router			/zhihu [get]
+func AcFunHot(c echo.Context) error {
+	return c.JSONPretty(http.StatusOK, map[string]interface{}{"status": "ok"}, " ")
+}
